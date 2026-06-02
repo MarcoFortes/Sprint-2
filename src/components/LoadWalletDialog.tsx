@@ -76,14 +76,14 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
                 </div>
               </div>
             </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => onOpenChange(false)} disabled={processing}>
+            <DialogFooter className="gap-2 sm:gap-0">
+              <Button variant="outline" onClick={() => onOpenChange(false)} disabled={processing} className="w-full sm:w-auto">
                 Cancel
               </Button>
               <Button
                 onClick={handleConfirm}
                 disabled={processing || !amount}
-                className="bg-[#00875A] text-white hover:bg-[#006644]"
+                className="w-full bg-[#00875A] text-white hover:bg-[#006644] sm:w-auto"
               >
                 {processing ? "Processing..." : `Pay ${amount || "0.00"} CVE`}
               </Button>
