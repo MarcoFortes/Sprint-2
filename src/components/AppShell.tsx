@@ -4,7 +4,7 @@ import { Wallet, Receipt } from "lucide-react";
 export function AppShell({ children, active }: { children: React.ReactNode; active: "wallet" | "history" }) {
   return (
     <div className="min-h-screen bg-[#F4F5F7]">
-      <header className="bg-[#172B4D] text-white">
+      <header className="bg-[#174793] text-white">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#00875A] font-bold">T</div>

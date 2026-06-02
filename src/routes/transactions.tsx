@@ -19,19 +19,19 @@ function TransactionsPage() {
   return (
     <AppShell active="history">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#172B4D]">Transaction history</h1>
+        <h1 className="text-2xl font-bold text-[#174793]">Transaction history</h1>
         <p className="text-sm text-muted-foreground">All recharges and receipts on your wallet.</p>
       </div>
 
       {transactions.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-[#172B4D]/20 bg-white p-12 text-center">
-          <Receipt className="mx-auto h-8 w-8 text-[#172B4D]/40" />
+        <div className="rounded-xl border border-dashed border-[#174793]/20 bg-white p-12 text-center">
+          <Receipt className="mx-auto h-8 w-8 text-[#174793]/40" />
           <p className="mt-3 text-sm text-muted-foreground">No transactions yet.</p>
         </div>
       ) : (
         <div className="overflow-hidden rounded-xl bg-white shadow-sm">
           <table className="w-full text-sm">
-            <thead className="bg-[#172B4D] text-white">
+            <thead className="bg-[#174793] text-white">
               <tr>
                 <th className="px-4 py-3 text-left font-medium">Date</th>
                 <th className="px-4 py-3 text-left font-medium">Receipt</th>
@@ -39,10 +39,10 @@ function TransactionsPage() {
                 <th className="px-4 py-3 text-right font-medium">Amount</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#172B4D]/10">
+            <tbody className="divide-y divide-[#174793]/10">
               {transactions.map((t) => (
                 <tr key={t.id} className="hover:bg-[#F4F5F7]">
-                  <td className="px-4 py-3 text-[#172B4D]">
+                  <td className="px-4 py-3 text-[#174793]">
                     {new Date(t.timestamp).toLocaleString()}
                   </td>
                   <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{t.receiptId}</td>
