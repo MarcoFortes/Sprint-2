@@ -71,7 +71,7 @@ function WalletPage() {
                     <CheckCircle2 className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-[#172B4D]">Wallet recharge</p>
+                    <p className="text-sm font-medium text-[#174793]">Wallet recharge</p>
                     <p className="text-xs text-muted-foreground">
                       {new Date(t.timestamp).toLocaleString()}
                     </p>
