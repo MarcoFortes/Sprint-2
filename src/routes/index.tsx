@@ -30,7 +30,7 @@ function WalletPage() {
             <p className="mt-2 text-5xl font-bold tracking-tight">
               ${balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            <p className="mt-1 text-sm text-white/60">Transcor SDVBO • USD</p>
+            <p className="mt-1 text-sm text-white/60">Transcor SDVBO • Escudo</p>
           </div>
           <div className="rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-wider">
             Active
@@ -79,7 +79,7 @@ function WalletPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-semibold text-[#00875A]">
-                    +${t.amount.toFixed(2)}
+                    +{t.amount.toFixed(2)} CVE
                   </p>
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{t.status}</p>
                 </div>

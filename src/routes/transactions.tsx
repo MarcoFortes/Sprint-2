@@ -52,7 +52,7 @@ function TransactionsPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right font-semibold text-[#00875A]">
-                    +${t.amount.toFixed(2)}
+                    +{t.amount.toFixed(2)} CVE
                   </td>
                 </tr>
               ))}

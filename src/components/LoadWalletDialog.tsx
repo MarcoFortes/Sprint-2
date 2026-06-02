@@ -45,12 +45,12 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
               </div>
               <DialogTitle className="text-[#172B4D]">Load Wallet</DialogTitle>
               <DialogDescription>
-                Simulated checkout. Enter the amount to recharge your Transcor SDVBO wallet.
+                Simulated checkout. Enter the amount in CVE to recharge your Transcor SDVBO wallet.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label htmlFor="amount">Recharge amount (USD)</Label>
+                <Label htmlFor="amount">Recharge amount (CVE)</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -85,7 +85,7 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
                 disabled={processing || !amount}
                 className="bg-[#00875A] text-white hover:bg-[#006644]"
               >
-                {processing ? "Processing..." : `Pay $${amount || "0.00"}`}
+                {processing ? "Processing..." : `Pay ${amount || "0.00"} CVE`}
               </Button>
             </DialogFooter>
           </>
@@ -96,7 +96,7 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
             </div>
             <h3 className="mt-4 text-lg font-semibold text-[#172B4D]">Payment approved</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              ${success.amount.toFixed(2)} added to your wallet.
+              {success.amount.toFixed(2)} CVE added to your wallet.
             </p>
             <p className="mt-2 text-xs text-muted-foreground">Receipt: {success.receiptId}</p>
             <Button
