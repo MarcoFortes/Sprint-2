@@ -23,27 +23,28 @@ function WalletPage() {
 
   return (
     <AppShell active="wallet">
-      <section className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#174793] to-[#0a1d3d] p-6 text-white shadow-lg">
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-white/60">Available balance</p>
-            <p className="mt-2 text-5xl font-bold tracking-tight">
-              {balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} CVE
+      <section className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#174793] to-[#0a1d3d] p-5 text-white shadow-lg sm:p-6">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-[11px] uppercase tracking-widest text-white/60 sm:text-xs">Available balance</p>
+            <p className="mt-2 break-words text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              {balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
+              <span className="text-xl font-semibold text-white/80 sm:text-2xl md:text-3xl">CVE</span>
             </p>
-            <p className="mt-1 text-sm text-white/60">Transcor SDVBO • Escudo</p>
+            <p className="mt-1 text-xs text-white/60 sm:text-sm">Transcor SDVBO • Escudo</p>
           </div>
-          <div className="rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-wider">
+          <div className="shrink-0 rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-wider">
             Active
           </div>
         </div>
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:gap-3">
           <Button
             onClick={() => setOpen(true)}
-            className="bg-[#00875A] text-white hover:bg-[#006644]"
+            className="w-full bg-[#00875A] text-white hover:bg-[#006644] sm:w-auto"
           >
             <Plus className="mr-1 h-4 w-4" /> Load Wallet
           </Button>
-          <Button asChild variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white">
+          <Button asChild variant="outline" className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white sm:w-auto">
             <Link to="/transactions">
               View history <ArrowUpRight className="ml-1 h-4 w-4" />
             </Link>
