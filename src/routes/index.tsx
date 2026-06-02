@@ -53,17 +53,17 @@ function WalletPage() {
 
       <section className="mt-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-[#172B4D]">Recent activity</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[#174793]">Recent activity</h2>
           <Link to="/transactions" className="text-xs font-medium text-[#00875A] hover:underline">
             See all
           </Link>
         </div>
         {recent.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-[#172B4D]/20 bg-white p-8 text-center text-sm text-muted-foreground">
+          <div className="rounded-xl border border-dashed border-[#174793]/20 bg-white p-8 text-center text-sm text-muted-foreground">
             No transactions yet. Tap <span className="font-medium text-[#00875A]">Load Wallet</span> to make your first recharge.
           </div>
         ) : (
-          <ul className="divide-y divide-[#172B4D]/10 overflow-hidden rounded-xl bg-white shadow-sm">
+          <ul className="divide-y divide-[#174793]/10 overflow-hidden rounded-xl bg-white shadow-sm">
             {recent.map((t) => (
               <li key={t.id} className="flex items-center justify-between p-4">
                 <div className="flex items-center gap-3">
