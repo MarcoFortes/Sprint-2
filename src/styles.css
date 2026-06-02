@@ -67,8 +67,10 @@
   --foreground: oklch(0.22 0.05 260);
   --brand-primary: #00875A;
   --brand-primary-hover: #006644;
-  --brand-secondary: #172B4D;
-  --brand-secondary-hover: #0b1a33;
+  --brand-secondary: #174793;
+  --brand-secondary-hover: #0a1d3d;
+  --brand-error: #ee2424;
+  --brand-error-hover: #c41e1e;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -81,7 +83,7 @@
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.6085 0.2320 27.7278);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.929 0.013 255.508);
   --input: oklch(0.929 0.013 255.508);
