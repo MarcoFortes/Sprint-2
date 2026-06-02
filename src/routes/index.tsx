@@ -28,7 +28,7 @@ function WalletPage() {
           <div>
             <p className="text-xs uppercase tracking-widest text-white/60">Available balance</p>
             <p className="mt-2 text-5xl font-bold tracking-tight">
-              ${balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} CVE
             </p>
             <p className="mt-1 text-sm text-white/60">Transcor SDVBO • Escudo</p>
           </div>
