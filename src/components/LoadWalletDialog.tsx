@@ -40,10 +40,10 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
         {!success ? (
           <>
             <DialogHeader>
-              <div className="flex items-center gap-2 text-xs font-medium text-[#172B4D]/60">
+              <div className="flex items-center gap-2 text-xs font-medium text-[#174793]/60">
                 <Lock className="h-3 w-3" /> SECURE PAYMENT GATEWAY
               </div>
-              <DialogTitle className="text-[#172B4D]">Load Wallet</DialogTitle>
+              <DialogTitle className="text-[#174793]">Load Wallet</DialogTitle>
               <DialogDescription>
                 Simulated checkout. Enter the amount in CVE to recharge your Transcor SDVBO wallet.
               </DialogDescription>

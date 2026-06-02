@@ -23,7 +23,7 @@ function WalletPage() {
 
   return (
     <AppShell active="wallet">
-      <section className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#172B4D] to-[#0b1a33] p-6 text-white shadow-lg">
+      <section className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#174793] to-[#0a1d3d] p-6 text-white shadow-lg">
         <div className="flex items-start justify-between">
           <div>
             <p className="text-xs uppercase tracking-widest text-white/60">Available balance</p>

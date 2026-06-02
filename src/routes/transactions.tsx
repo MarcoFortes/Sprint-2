@@ -19,7 +19,7 @@ function TransactionsPage() {
   return (
     <AppShell active="history">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#172B4D]">Transaction history</h1>
+        <h1 className="text-2xl font-bold text-[#174793]">Transaction history</h1>
         <p className="text-sm text-muted-foreground">All recharges and receipts on your wallet.</p>
       </div>
 
