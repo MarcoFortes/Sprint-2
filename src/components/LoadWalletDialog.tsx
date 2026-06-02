@@ -40,10 +40,10 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
         {!success ? (
           <>
             <DialogHeader>
-              <div className="flex items-center gap-2 text-xs font-medium text-[#174793]/60">
+              <div className="flex items-center gap-2 text-xs font-medium text-[#172B4D]/60">
                 <Lock className="h-3 w-3" /> SECURE PAYMENT GATEWAY
               </div>
-              <DialogTitle className="text-[#174793]">Load Wallet</DialogTitle>
+              <DialogTitle className="text-[#172B4D]">Load Wallet</DialogTitle>
               <DialogDescription>
                 Simulated checkout. Enter the amount in CVE to recharge your Transcor SDVBO wallet.
               </DialogDescription>
@@ -94,13 +94,13 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#00875A]/10">
               <CheckCircle2 className="h-8 w-8 text-[#00875A]" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-[#174793]">Payment approved</h3>
+            <h3 className="mt-4 text-lg font-semibold text-[#172B4D]">Payment approved</h3>
             <p className="mt-1 text-sm text-muted-foreground">
               {success.amount.toFixed(2)} CVE added to your wallet.
             </p>
             <p className="mt-2 text-xs text-muted-foreground">Receipt: {success.receiptId}</p>
             <Button
-              className="mt-6 w-full bg-[#174793] text-white hover:bg-[#0f2e66]"
+              className="mt-6 w-full bg-[#172B4D] text-white hover:bg-[#0b1a33]"
               onClick={() => onOpenChange(false)}
             >
               Done
