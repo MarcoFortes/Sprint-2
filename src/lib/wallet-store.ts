@@ -1,11 +1,17 @@
 import { useSyncExternalStore } from "react";
 
+export const TICKET_PRICE = 150;
+
+export type TxType = "recharge" | "ticket";
+
 export type Transaction = {
   id: string;
-  amount: number;
+  type: TxType;
+  amount: number; // positive for recharge, negative for ticket
   timestamp: string;
   status: "Approved" | "Pending" | "Failed";
   receiptId: string;
+  label: string;
 };
 
 type State = {
@@ -21,6 +27,9 @@ let state: State = {
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
 
+const newReceipt = (prefix: string) =>
+  `${prefix}-` + Math.random().toString(36).slice(2, 10).toUpperCase();
+
 export const walletStore = {
   subscribe(l: () => void) {
     listeners.add(l);
@@ -32,10 +41,12 @@ export const walletStore = {
   loadWallet(amount: number): Transaction {
     const tx: Transaction = {
       id: crypto.randomUUID(),
+      type: "recharge",
       amount,
       timestamp: new Date().toISOString(),
       status: "Approved",
-      receiptId: "RCP-" + Math.random().toString(36).slice(2, 10).toUpperCase(),
+      receiptId: newReceipt("RCP"),
+      label: "Wallet recharge",
     };
     state = {
       balance: state.balance + amount,
@@ -43,6 +54,28 @@ export const walletStore = {
     };
     emit();
     return tx;
+  },
+  generateTicket():
+    | { ok: true; tx: Transaction }
+    | { ok: false; reason: "insufficient" } {
+    if (state.balance < TICKET_PRICE) {
+      return { ok: false, reason: "insufficient" };
+    }
+    const tx: Transaction = {
+      id: crypto.randomUUID(),
+      type: "ticket",
+      amount: -TICKET_PRICE,
+      timestamp: new Date().toISOString(),
+      status: "Approved",
+      receiptId: newReceipt("TKT"),
+      label: "Ticket issued",
+    };
+    state = {
+      balance: state.balance - TICKET_PRICE,
+      transactions: [tx, ...state.transactions],
+    };
+    emit();
+    return { ok: true, tx };
   },
 };
 
