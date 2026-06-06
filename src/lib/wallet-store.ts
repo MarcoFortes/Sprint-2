@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 
-export const TICKET_PRICE = 150;
+export const TICKET_PRICE = 42;
 
 export type TxType = "recharge" | "ticket";
 
