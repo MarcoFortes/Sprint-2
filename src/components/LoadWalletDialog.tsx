@@ -44,8 +44,8 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
     if (cvc.length < 3) return;
     setSending(true);
     await new Promise((r) => setTimeout(r, 900));
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setSmsCode(code);
+    // In production the code is sent via SMS/Gmail; for the prototype it is fixed so the flow remains testable.
+    setSmsCode("123456");
     setSending(false);
     setStep("sms");
   };
