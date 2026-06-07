@@ -143,12 +143,6 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
             </DialogHeader>
 
             <div className="space-y-4 py-2">
-              <div className="rounded-md border border-[#174793]/20 bg-[#174793]/5 p-3 text-sm text-[#174793]">
-                <p className="font-medium">Verification code sent</p>
-                <p className="mt-1 text-xs text-[#174793]/80">
-                  A verification code has been sent to the mobile phone number associated with this bank account ({maskedPhoneFor(card)}).
-                </p>
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="code">Verification code</Label>
                 <Input
