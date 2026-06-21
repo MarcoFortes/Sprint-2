@@ -50,9 +50,13 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
 
   const canSubmit = Boolean(lineId && from && to && from !== to);
 
+  const parseStation = (v: string) => v.split(":").slice(1).join(":");
+
   const handleConfirm = () => {
     if (!canSubmit || !line) return;
-    const result = walletStore.generateTicket({ lineId: line.id, from, to });
+    const fromName = parseStation(from);
+    const toName = parseStation(to);
+    const result = walletStore.generateTicket({ lineId: line.id, from: fromName, to: toName });
     if (!result.ok) {
       toast.error("Insufficient balance", {
         description: `You need at least ${TICKET_PRICE.toFixed(2)} CVE to generate a ticket.`,
@@ -62,7 +66,7 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
       return;
     }
     toast.success("Ticket generated", {
-      description: `${line.id} · ${from} → ${to} · −${TICKET_PRICE.toFixed(2)} CVE`,
+      description: `${line.id} · ${fromName} → ${toName} · −${TICKET_PRICE.toFixed(2)} CVE`,
     });
     onOpenChange(false);
   };
