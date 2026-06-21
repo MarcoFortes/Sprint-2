@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { LoadWalletDialog } from "@/components/LoadWalletDialog";
-import { TICKET_PRICE, useWallet, walletStore } from "@/lib/wallet-store";
+import { GenerateTicketDialog } from "@/components/GenerateTicketDialog";
+import { TICKET_PRICE, useWallet } from "@/lib/wallet-store";
 import { Button } from "@/components/ui/button";
 import { Plus, ArrowUpRight, CheckCircle2, Ticket, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
@@ -20,21 +21,19 @@ export const Route = createFileRoute("/")({
 function WalletPage() {
   const { balance, transactions } = useWallet();
   const [open, setOpen] = useState(false);
+  const [ticketOpen, setTicketOpen] = useState(false);
   const recent = transactions.slice(0, 3);
   const insufficient = balance < TICKET_PRICE;
 
   const handleGenerateTicket = () => {
-    const result = walletStore.generateTicket();
-    if (!result.ok) {
+    if (insufficient) {
       toast.error("Insufficient balance", {
         description: `You need at least ${TICKET_PRICE.toFixed(2)} CVE to generate a ticket. Please reload your wallet.`,
         action: { label: "Load Wallet", onClick: () => setOpen(true) },
       });
       return;
     }
-    toast.success("Ticket generated", {
-      description: `−${TICKET_PRICE.toFixed(2)} CVE · Receipt ${result.tx.receiptId}`,
-    });
+    setTicketOpen(true);
   };
 
   return (
@@ -136,6 +135,11 @@ function WalletPage() {
       </section>
 
       <LoadWalletDialog open={open} onOpenChange={setOpen} />
+      <GenerateTicketDialog
+        open={ticketOpen}
+        onOpenChange={setTicketOpen}
+        onInsufficient={() => setOpen(true)}
+      />
     </AppShell>
   );
 }
