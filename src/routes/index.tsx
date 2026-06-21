@@ -135,6 +135,11 @@ function WalletPage() {
       </section>
 
       <LoadWalletDialog open={open} onOpenChange={setOpen} />
+      <GenerateTicketDialog
+        open={ticketOpen}
+        onOpenChange={setTicketOpen}
+        onInsufficient={() => setOpen(true)}
+      />
     </AppShell>
   );
 }
