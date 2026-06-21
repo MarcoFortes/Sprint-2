@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { LoadWalletDialog } from "@/components/LoadWalletDialog";
-import { TICKET_PRICE, useWallet, walletStore } from "@/lib/wallet-store";
+import { GenerateTicketDialog } from "@/components/GenerateTicketDialog";
+import { TICKET_PRICE, useWallet } from "@/lib/wallet-store";
 import { Button } from "@/components/ui/button";
 import { Plus, ArrowUpRight, CheckCircle2, Ticket, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
@@ -10,8 +11,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Transcor SDVBO — Wallet" },
-      { name: "description", content: "Manage your Transcor SDVBO digital wallet balance and recharges." },
+      { title: "Transcor SDVBO — Carteira" },
+      { name: "description", content: "Gere o saldo e os carregamentos da sua carteira digital Transcor SDVBO." },
     ],
   }),
   component: WalletPage,
@@ -20,21 +21,19 @@ export const Route = createFileRoute("/")({
 function WalletPage() {
   const { balance, transactions } = useWallet();
   const [open, setOpen] = useState(false);
+  const [ticketOpen, setTicketOpen] = useState(false);
   const recent = transactions.slice(0, 3);
   const insufficient = balance < TICKET_PRICE;
 
   const handleGenerateTicket = () => {
-    const result = walletStore.generateTicket();
-    if (!result.ok) {
-      toast.error("Insufficient balance", {
-        description: `You need at least ${TICKET_PRICE.toFixed(2)} CVE to generate a ticket. Please reload your wallet.`,
-        action: { label: "Load Wallet", onClick: () => setOpen(true) },
+    if (insufficient) {
+      toast.error("Saldo insuficiente", {
+        description: `Precisa de pelo menos ${TICKET_PRICE.toFixed(2)} CVE para gerar um bilhete. Por favor, recarregue a sua carteira.`,
+        action: { label: "Carregar Carteira", onClick: () => setOpen(true) },
       });
       return;
     }
-    toast.success("Ticket generated", {
-      description: `−${TICKET_PRICE.toFixed(2)} CVE · Receipt ${result.tx.receiptId}`,
-    });
+    setTicketOpen(true);
   };
 
   return (
@@ -42,17 +41,17 @@ function WalletPage() {
       <section className="overflow-hidden rounded-2xl bg-gradient-to-br from-[#174793] to-[#0a1d3d] p-5 text-white shadow-lg sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-[11px] uppercase tracking-widest text-white/60 sm:text-xs">Available balance</p>
+            <p className="text-[11px] uppercase tracking-widest text-white/60 sm:text-xs">Saldo disponível</p>
             <p className="mt-2 break-words text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              {balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
+              {balance.toLocaleString("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
               <span className="text-xl font-semibold text-white/80 sm:text-2xl md:text-3xl">CVE</span>
             </p>
             <p className="mt-1 text-xs text-white/60 sm:text-sm">
-              Transcor SDVBO • Ticket price {TICKET_PRICE.toFixed(2)} CVE
+              Transcor SDVBO • Preço do bilhete {TICKET_PRICE.toFixed(2)} CVE
             </p>
           </div>
           <div className="shrink-0 rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium uppercase tracking-wider">
-            Active
+            Ativa
           </div>
         </div>
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:gap-3">
@@ -60,18 +59,18 @@ function WalletPage() {
             onClick={() => setOpen(true)}
             className="w-full bg-[#00875A] text-white hover:bg-[#006644] sm:w-auto"
           >
-            <Plus className="mr-1 h-4 w-4" /> Load Wallet
+            <Plus className="mr-1 h-4 w-4" /> Carregar Carteira
           </Button>
           <Button
             onClick={handleGenerateTicket}
             disabled={insufficient}
             className="w-full bg-white text-[#174793] hover:bg-white/90 disabled:opacity-60 sm:w-auto"
           >
-            <Ticket className="mr-1 h-4 w-4" /> Generate Ticket
+            <Ticket className="mr-1 h-4 w-4" /> Gerar Bilhete
           </Button>
           <Button asChild variant="outline" className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white sm:w-auto">
             <Link to="/transactions">
-              View history <ArrowUpRight className="ml-1 h-4 w-4" />
+              Ver histórico <ArrowUpRight className="ml-1 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -81,9 +80,9 @@ function WalletPage() {
         <div className="mt-4 flex items-start gap-3 rounded-xl border border-[#ee2424]/30 bg-[#ee2424]/5 p-4 text-sm text-[#ee2424]">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <div>
-            <p className="font-semibold">Insufficient balance to generate a ticket</p>
+            <p className="font-semibold">Saldo insuficiente para gerar um bilhete</p>
             <p className="text-xs text-[#ee2424]/80">
-              You need at least {TICKET_PRICE.toFixed(2)} CVE. Reload your wallet to keep generating tickets.
+              Precisa de pelo menos {TICKET_PRICE.toFixed(2)} CVE. Recarregue a sua carteira para continuar a gerar bilhetes.
             </p>
           </div>
         </div>
@@ -91,14 +90,14 @@ function WalletPage() {
 
       <section className="mt-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-[#174793]">Recent activity</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[#174793]">Atividade recente</h2>
           <Link to="/transactions" className="text-xs font-medium text-[#00875A] hover:underline">
-            See all
+            Ver tudo
           </Link>
         </div>
         {recent.length === 0 ? (
           <div className="rounded-xl border border-dashed border-[#174793]/20 bg-white p-8 text-center text-sm text-muted-foreground">
-            No transactions yet. Tap <span className="font-medium text-[#00875A]">Load Wallet</span> to make your first recharge.
+            Ainda sem transações. Toque em <span className="font-medium text-[#00875A]">Carregar Carteira</span> para fazer o seu primeiro carregamento.
           </div>
         ) : (
           <ul className="divide-y divide-[#174793]/10 overflow-hidden rounded-xl bg-white shadow-sm">
@@ -117,7 +116,7 @@ function WalletPage() {
                     <div>
                       <p className="text-sm font-medium text-[#174793]">{t.label}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(t.timestamp).toLocaleString()}
+                        {new Date(t.timestamp).toLocaleString("pt-PT")}
                       </p>
                     </div>
                   </div>
@@ -136,6 +135,11 @@ function WalletPage() {
       </section>
 
       <LoadWalletDialog open={open} onOpenChange={setOpen} />
+      <GenerateTicketDialog
+        open={ticketOpen}
+        onOpenChange={setTicketOpen}
+        onInsufficient={() => setOpen(true)}
+      />
     </AppShell>
   );
 }

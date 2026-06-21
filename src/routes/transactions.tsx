@@ -6,8 +6,8 @@ import { CheckCircle2, Receipt, Ticket } from "lucide-react";
 export const Route = createFileRoute("/transactions")({
   head: () => ({
     meta: [
-      { title: "Transactions — Transcor SDVBO" },
-      { name: "description", content: "Complete history of wallet transactions and receipts." },
+      { title: "Transações — Transcor SDVBO" },
+      { name: "description", content: "Histórico completo de transações e recibos da carteira." },
     ],
   }),
   component: TransactionsPage,
@@ -19,14 +19,14 @@ function TransactionsPage() {
   return (
     <AppShell active="history">
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-[#174793] sm:text-2xl">Transaction history</h1>
-        <p className="text-sm text-muted-foreground">All recharges and tickets on your wallet.</p>
+        <h1 className="text-xl font-bold text-[#174793] sm:text-2xl">Histórico de transações</h1>
+        <p className="text-sm text-muted-foreground">Todos os carregamentos e bilhetes da sua carteira.</p>
       </div>
 
       {transactions.length === 0 ? (
         <div className="rounded-xl border border-dashed border-[#174793]/20 bg-white p-12 text-center">
           <Receipt className="mx-auto h-8 w-8 text-[#174793]/40" />
-          <p className="mt-3 text-sm text-muted-foreground">No transactions yet.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Ainda sem transações.</p>
         </div>
       ) : (
         <>
@@ -40,7 +40,7 @@ function TransactionsPage() {
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-[#174793]">{t.label}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(t.timestamp).toLocaleString()}
+                        {new Date(t.timestamp).toLocaleString("pt-PT")}
                       </p>
                       <p className="mt-1 truncate font-mono text-xs text-muted-foreground">
                         {t.receiptId}
@@ -68,11 +68,11 @@ function TransactionsPage() {
             <table className="w-full text-sm">
               <thead className="bg-[#174793] text-white">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium">Date</th>
-                  <th className="px-4 py-3 text-left font-medium">Type</th>
-                  <th className="px-4 py-3 text-left font-medium">Receipt</th>
-                  <th className="px-4 py-3 text-left font-medium">Status</th>
-                  <th className="px-4 py-3 text-right font-medium">Amount</th>
+                  <th className="px-4 py-3 text-left font-medium">Data</th>
+                  <th className="px-4 py-3 text-left font-medium">Tipo</th>
+                  <th className="px-4 py-3 text-left font-medium">Recibo</th>
+                  <th className="px-4 py-3 text-left font-medium">Estado</th>
+                  <th className="px-4 py-3 text-right font-medium">Valor</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#174793]/10">
@@ -81,7 +81,7 @@ function TransactionsPage() {
                   return (
                     <tr key={t.id} className="hover:bg-[#F4F5F7]">
                       <td className="px-4 py-3 text-[#174793]">
-                        {new Date(t.timestamp).toLocaleString()}
+                        {new Date(t.timestamp).toLocaleString("pt-PT")}
                       </td>
                       <td className="px-4 py-3">
                         <span className="inline-flex items-center gap-1.5 text-[#174793]">

@@ -46,7 +46,7 @@ export const walletStore = {
       timestamp: new Date().toISOString(),
       status: "Approved",
       receiptId: newReceipt("RCP"),
-      label: "Wallet recharge",
+      label: "Carregamento da carteira",
     };
     state = {
       balance: state.balance + amount,
@@ -55,12 +55,15 @@ export const walletStore = {
     emit();
     return tx;
   },
-  generateTicket():
+  generateTicket(trip?: { lineId: string; from: string; to: string }):
     | { ok: true; tx: Transaction }
     | { ok: false; reason: "insufficient" } {
     if (state.balance < TICKET_PRICE) {
       return { ok: false, reason: "insufficient" };
     }
+    const label = trip
+      ? `Bilhete ${trip.lineId} · ${trip.from} → ${trip.to}`
+      : "Bilhete emitido";
     const tx: Transaction = {
       id: crypto.randomUUID(),
       type: "ticket",
@@ -68,7 +71,7 @@ export const walletStore = {
       timestamp: new Date().toISOString(),
       status: "Approved",
       receiptId: newReceipt("TKT"),
-      label: "Ticket issued",
+      label,
     };
     state = {
       balance: state.balance - TICKET_PRICE,

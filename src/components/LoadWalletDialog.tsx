@@ -8,7 +8,7 @@ import { Lock, CheckCircle2, MessageSquare, ArrowLeft } from "lucide-react";
 
 type Step = "card" | "sms" | "success";
 
-// Masks last 4 digits of card to derive a fake associated phone number.
+// Mascara últimos 4 dígitos do cartão para derivar um número de telefone associado fictício.
 function maskedPhoneFor(card: string) {
   const digits = card.replace(/\D/g, "").slice(-4) || "0000";
   return `+238 9** ** ${digits.slice(0, 2)} ${digits.slice(2)}`;
@@ -44,7 +44,7 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
     if (cvc.length < 3) return;
     setSending(true);
     await new Promise((r) => setTimeout(r, 900));
-    // In production the code is sent via SMS/Gmail; for the prototype it is fixed so the flow remains testable.
+    // Em produção o código é enviado por SMS/Gmail; no protótipo é fixo para o fluxo ser testável.
     setSmsCode("123456");
     setSending(false);
     setStep("sms");
@@ -53,7 +53,7 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
   const handleVerifyAndPay = async () => {
     setError(null);
     if (inputCode.trim() !== smsCode) {
-      setError("Invalid verification code. Check the SMS and try again.");
+      setError("Código de verificação inválido. Verifique o SMS e tente novamente.");
       return;
     }
     setProcessing(true);
@@ -78,33 +78,33 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
           <>
             <DialogHeader>
               <div className="flex items-center gap-2 text-xs font-medium text-[#174793]/60">
-                <Lock className="h-3 w-3" /> SECURE PAYMENT GATEWAY
+                <Lock className="h-3 w-3" /> GATEWAY DE PAGAMENTO SEGURO
               </div>
-              <DialogTitle className="text-[#174793]">Load Wallet</DialogTitle>
+              <DialogTitle className="text-[#174793]">Carregar Carteira</DialogTitle>
               <DialogDescription>
-                Simulated checkout. Enter the amount in CVE to recharge your Transcor SDVBO wallet.
+                Checkout simulado. Introduza o valor em CVE para recarregar a sua carteira Transcor SDVBO.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label htmlFor="amount">Recharge amount (CVE)</Label>
+                <Label htmlFor="amount">Valor do carregamento (CVE)</Label>
                 <Input
                   id="amount"
                   type="number"
                   min="1"
-                  placeholder="0.00"
+                  placeholder="0,00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   className="text-lg"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="card">Card number</Label>
+                <Label htmlFor="card">Número do cartão</Label>
                 <Input id="card" value={card} onChange={(e) => setCard(e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
-                  <Label htmlFor="exp">Expiry</Label>
+                  <Label htmlFor="exp">Validade</Label>
                   <Input id="exp" value={exp} onChange={(e) => setExp(e.target.value)} />
                 </div>
                 <div className="space-y-2">
@@ -115,14 +115,14 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
             </div>
             <DialogFooter className="gap-2 sm:gap-0">
               <Button variant="outline" onClick={() => onOpenChange(false)} disabled={sending} className="w-full sm:w-auto">
-                Cancel
+                Cancelar
               </Button>
               <Button
                 onClick={handleSendCode}
                 disabled={sending || !amount}
                 className="w-full bg-[#00875A] text-white hover:bg-[#006644] sm:w-auto"
               >
-                {sending ? "Sending SMS..." : "Send verification code"}
+                {sending ? "A enviar SMS..." : "Enviar código de verificação"}
               </Button>
             </DialogFooter>
           </>
@@ -132,19 +132,19 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
           <>
             <DialogHeader>
               <div className="flex items-center gap-2 text-xs font-medium text-[#174793]/60">
-                <MessageSquare className="h-3 w-3" /> TWO-FACTOR AUTHENTICATION
+                <MessageSquare className="h-3 w-3" /> AUTENTICAÇÃO DE DOIS FATORES
               </div>
-              <DialogTitle className="text-[#174793]">Enter SMS code</DialogTitle>
+              <DialogTitle className="text-[#174793]">Introduzir código SMS</DialogTitle>
               <DialogDescription>
-                A 6-digit code was sent to{" "}
-                <span className="font-medium text-[#174793]">{maskedPhoneFor(card)}</span>, the phone
-                associated with this card.
+                Foi enviado um código de 6 dígitos para{" "}
+                <span className="font-medium text-[#174793]">{maskedPhoneFor(card)}</span>, o número de telemóvel
+                associado a este cartão.
               </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label htmlFor="code">Verification code</Label>
+                <Label htmlFor="code">Código de verificação</Label>
                 <Input
                   id="code"
                   inputMode="numeric"
@@ -157,9 +157,9 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
                 {error && <p className="text-xs font-medium text-[#ee2424]">{error}</p>}
               </div>
               <p className="text-xs text-muted-foreground">
-                Confirming will debit{" "}
+                Ao confirmar serão debitados{" "}
                 <span className="font-semibold text-[#174793]">{parseFloat(amount || "0").toFixed(2)} CVE</span>{" "}
-                from your bank account and credit your Transcor wallet.
+                da sua conta bancária e creditados na sua carteira Transcor.
               </p>
             </div>
 
@@ -174,14 +174,14 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
                 disabled={processing}
                 className="w-full sm:w-auto"
               >
-                <ArrowLeft className="mr-1 h-4 w-4" /> Back
+                <ArrowLeft className="mr-1 h-4 w-4" /> Voltar
               </Button>
               <Button
                 onClick={handleVerifyAndPay}
                 disabled={processing || inputCode.length < 6}
                 className="w-full bg-[#00875A] text-white hover:bg-[#006644] sm:w-auto"
               >
-                {processing ? "Processing..." : `Confirm payment`}
+                {processing ? "A processar..." : `Confirmar pagamento`}
               </Button>
             </DialogFooter>
           </>
@@ -192,16 +192,16 @@ export function LoadWalletDialog({ open, onOpenChange }: { open: boolean; onOpen
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#00875A]/10">
               <CheckCircle2 className="h-8 w-8 text-[#00875A]" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-[#174793]">Payment approved</h3>
+            <h3 className="mt-4 text-lg font-semibold text-[#174793]">Pagamento aprovado</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {success.amount.toFixed(2)} CVE added to your wallet.
+              {success.amount.toFixed(2)} CVE adicionados à sua carteira.
             </p>
-            <p className="mt-2 text-xs text-muted-foreground">Receipt: {success.receiptId}</p>
+            <p className="mt-2 text-xs text-muted-foreground">Recibo: {success.receiptId}</p>
             <Button
               className="mt-6 w-full bg-[#174793] text-white hover:bg-[#0a1d3d]"
               onClick={() => onOpenChange(false)}
             >
-              Done
+              Concluir
             </Button>
           </div>
         )}
