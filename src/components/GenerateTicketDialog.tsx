@@ -58,14 +58,14 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
     const toName = parseStation(to);
     const result = walletStore.generateTicket({ lineId: line.id, from: fromName, to: toName });
     if (!result.ok) {
-      toast.error("Insufficient balance", {
-        description: `You need at least ${TICKET_PRICE.toFixed(2)} CVE to generate a ticket.`,
+      toast.error("Saldo insuficiente", {
+        description: `Precisa de pelo menos ${TICKET_PRICE.toFixed(2)} CVE para gerar um bilhete.`,
       });
       onOpenChange(false);
       onInsufficient?.();
       return;
     }
-    toast.success("Ticket generated", {
+    toast.success("Bilhete gerado", {
       description: `${line.id} · ${fromName} → ${toName} · −${TICKET_PRICE.toFixed(2)} CVE`,
     });
     onOpenChange(false);
@@ -76,20 +76,19 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-[#174793]">
-            <Ticket className="h-5 w-5" /> Generate Ticket
+            <Ticket className="h-5 w-5" /> Gerar Bilhete
           </DialogTitle>
           <DialogDescription>
-            Choose your line, then pick the station where you are boarding and
-            where you will disembark.
+            Escolha a sua linha e selecione a estação onde vai embarcar e a estação onde vai desembarcar.
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-2">
           <div className="space-y-2">
-            <Label htmlFor="line">Line</Label>
+            <Label htmlFor="line">Linha</Label>
             <Select value={lineId} onValueChange={setLineId}>
               <SelectTrigger id="line">
-                <SelectValue placeholder="Select a line" />
+                <SelectValue placeholder="Selecione uma linha" />
               </SelectTrigger>
               <SelectContent>
                 {LINES.map((l) => (
@@ -103,10 +102,10 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="from">Boarding station</Label>
+              <Label htmlFor="from">Estação de embarque</Label>
               <Select value={from} onValueChange={setFrom} disabled={!line}>
                 <SelectTrigger id="from">
-                  <SelectValue placeholder={line ? "Select station" : "Pick a line first"} />
+                  <SelectValue placeholder={line ? "Selecione a estação" : "Escolha uma linha primeiro"} />
                 </SelectTrigger>
                 <SelectContent>
                   {stations.map((s, i) => (
@@ -118,10 +117,10 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="to">Disembark station</Label>
+              <Label htmlFor="to">Estação de desembarque</Label>
               <Select value={to} onValueChange={setTo} disabled={!line}>
                 <SelectTrigger id="to">
-                  <SelectValue placeholder={line ? "Select station" : "Pick a line first"} />
+                  <SelectValue placeholder={line ? "Selecione a estação" : "Escolha uma linha primeiro"} />
                 </SelectTrigger>
                 <SelectContent>
                   {stations.map((s, i) => (
@@ -140,7 +139,7 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
 
           {from && to && from === to && (
             <p className="text-xs text-[#ee2424]">
-              Boarding and disembark stations must be different.
+              As estações de embarque e desembarque têm de ser diferentes.
             </p>
           )}
 
@@ -153,7 +152,7 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
                 <span className="truncate">{to.split(":").slice(1).join(":")}</span>
               </div>
               <p className="mt-1 text-xs text-[#174793]/70">
-                Fare: {TICKET_PRICE.toFixed(2)} CVE
+                Tarifa: {TICKET_PRICE.toFixed(2)} CVE
               </p>
             </div>
           )}
@@ -161,14 +160,14 @@ export function GenerateTicketDialog({ open, onOpenChange, onInsufficient }: Pro
 
         <DialogFooter className="gap-2 sm:gap-0">
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Cancelar
           </Button>
           <Button
             onClick={handleConfirm}
             disabled={!canSubmit}
             className="bg-[#174793] text-white hover:bg-[#103563]"
           >
-            Confirm · {TICKET_PRICE.toFixed(2)} CVE
+            Confirmar · {TICKET_PRICE.toFixed(2)} CVE
           </Button>
         </DialogFooter>
       </DialogContent>

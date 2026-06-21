@@ -10,7 +10,7 @@ export function AppShell({ children, active }: { children: React.ReactNode; acti
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#00875A] font-bold">T</div>
             <div className="min-w-0">
               <div className="truncate text-sm font-semibold leading-none">Transcor</div>
-              <div className="truncate text-[10px] uppercase tracking-widest text-white/60">SDVBO Wallet</div>
+              <div className="truncate text-[10px] uppercase tracking-widest text-white/60">Carteira SDVBO</div>
             </div>
           </div>
           <nav className="flex shrink-0 items-center gap-1 rounded-full bg-white/10 p-1 text-xs sm:text-sm">
@@ -20,7 +20,7 @@ export function AppShell({ children, active }: { children: React.ReactNode; acti
                 active === "wallet" ? "bg-[#00875A] text-white" : "text-white/80 hover:text-white"
               }`}
             >
-              <Wallet className="h-4 w-4" /> Wallet
+              <Wallet className="h-4 w-4" /> Carteira
             </Link>
             <Link
               to="/transactions"
@@ -28,7 +28,7 @@ export function AppShell({ children, active }: { children: React.ReactNode; acti
                 active === "history" ? "bg-[#00875A] text-white" : "text-white/80 hover:text-white"
               }`}
             >
-              <Receipt className="h-4 w-4" /> History
+              <Receipt className="h-4 w-4" /> Histórico
             </Link>
           </nav>
         </div>
